@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<title></title>
+
+        <meta name="description" content="">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="robots" content="noindex, follow">
+        <meta name="generator" content="WebAcappellaFusion (2.4.4)" >
+
+
+	<script>
+                function getFirstBrowserLanguage()
+                {
+                    var nav = window.navigator;
+                    var browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage'];
+                    var i = 0;
+                    var language = "";
+
+                    // support for HTML 5.1 "navigator.languages"
+                    if (Array.isArray(nav.languages)) {
+                      for (i = 0; i < nav.languages.length; i++) {
+                        language = nav.languages[i];
+                        if (language && language.length) {
+                          return language;
+                        }
+                      }
+                    }
+                    // support for other well known properties in browsers
+                    for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
+                      language = nav[browserLanguagePropertyKeys[i]];
+                      if (language && language.length) {
+                        return language;
+                      }
+                    }
+                    return "";
+                };
+
+                function normalizeLangIsoCode(code)
+                {
+                        return code.replace("-", "_").toLowerCase();
+                }
+                function extractLangCode(code)
+                {
+                        code = normalizeLangIsoCode(code);
+                        var i = code.indexOf("_");
+                        if (i>-1) return code.substring(0,i);
+                        return code;
+                }
+
+                function findBestUrl()
+                {
+                        var mapUrls = [];
+
+
+                        mapUrls["fr"] = "es/";
+mapUrls["en"] = "de/";
+
+
+                        var iso_browser = getFirstBrowserLanguage();
+
+                        var  iso_code= normalizeLangIsoCode(iso_browser);
+                        var  lang=extractLangCode(iso_code);
+                        for (var key in mapUrls)
+                        {
+                            var key2 = key.toLowerCase();
+                            if (key2===iso_code) return mapUrls[key];
+                        }
+                        for (var key in mapUrls)
+                        {
+                            var lng2 = extractLangCode(key);
+                            if (lng2===lang) return mapUrls[key];
+                        }
+
+                        return "es/";
+                }
+
+                var url = findBestUrl();
+                document.location.href = url;
+	</script>
+</head>
+
+<body>
+
+	<!--  AUTO_LANG_REDIRECT   -->
+
+<div style='display:flex;margin:30px;justify-content: center;flex-direction: column;'>
+	<div style='display:flex;flex-direction: column;'>
+        <div style='display:flex;justify-content:center;margin:10px;'><h2><a style='font-size:13px;color:lightgray;' href="es/">Español de España</a></h2></div>
+<div style='display:flex;justify-content:center;margin:10px;'><h2><a style='font-size:13px;color:lightgray;' href="de/">Deutsch</a></h2></div>
+
+	</div>
+</div>
+
+
+</body>
+</html>
+
